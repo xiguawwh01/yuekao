@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+</head>
+<script>
+    var app=angular.module('myApp',[]);
+
+    app.controller("mcontroller",function ($scope,$http) {
+        $scope.bk={
+            tname:"",
+            cont:"",
+            zname:"",
+            fdate:"",
+            tz:0
+        },
+        $scope.addb=function () {
+                alert("123")
+            $http.post("../user/addbk.do",$scope.bk).success(
+                function (jg) {
+                    location.href="list.html"
+                }
+            )
+            }
+
+    })
+</script>
+<body ng-app="myApp" ng-controller="mcontroller">
+<table>
+    <tr>
+        <td>标题:<input type="text" ng-model="bk.tname"></td>
+    </tr>
+    <tr>
+        <td>内容:<input type="text" ng-model="bk.cont"></td>
+    </tr>
+    <tr>
+        <td>作者:<input type="text" ng-model="bk.zname"></td>
+    </tr>
+    <tr>
+        <td>发布时间:<input type="date" ng-model="bk.fdate"></td>
+    </tr>
+    <tr>
+        <td>是否接收通知:<input type="text" ng-model="bk.tz"></td>
+    </tr>
+    <tr>
+        <td><input type="button" value="添加博客" ng-click="addb()"></td>
+    </tr>
+</table>
+</body>
+</html>

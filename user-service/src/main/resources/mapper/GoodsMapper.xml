@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.pinyougou.mapper.UserMapper">
+	<select id="login" parameterType="java.lang.String" resultType="com.wwh.pojo.User">
+		select * from t_user where uname='${value}'
+	</select>
+
+<select id="list" resultType="com.wwh.pojo.Bk">
+	select *  from t_bk
+</select>
+
+	<select id="plist" resultType="com.wwh.pojo.Pl">
+		select * from t_pl   ORDER BY  pdate DESC
+	</select>
+
+
+	<insert id="addbk" parameterType="com.wwh.pojo.Bk">
+		insert into t_bk values(null,#{cont},#{zname},#{fdate},#{count},#{tz},#{tname})
+	</insert>
+
+
+	<select id="getbybkid" parameterType="java.lang.Integer" resultType="com.wwh.pojo.Bk">
+		select * from t_bk where id=${value}
+	</select>
+
+	<insert id="addpl" parameterType="com.wwh.pojo.Pl" >
+		insert into t_pl values(null,#{pname},#{pcount},#{pdate})
+	</insert>
+
+	<update id="upbk" parameterType="com.wwh.pojo.Bk">
+		update t_bk set tz=#{tz} where id=#{id}
+	</update>
+</mapper>

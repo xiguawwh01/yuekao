@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+</head>
+<script>
+
+    var app=angular.module('myApp',[]);
+    var href=location.href;
+    var id=href.substring(href.indexOf("=")+1)
+
+    app.controller("mycontroller",function ($scope,$http) {
+        $scope.pl={
+            pname:"",
+            pcount:""
+        }
+        $scope.pl=function () {
+            alert(id)
+            $http.post("../user/addpl.do",$scope.pl).success(
+                function (jg) {
+                    location.href="list.html"
+                }
+            )
+        }
+    })
+</script>
+<body ng-app="myApp" ng-controller="mycontroller">
+<table>
+    <tr>
+        <td>评论人:<input type="text" ng-model="pl.pname"></td>
+    </tr>
+    <tr>
+        <td>评论内容:<input type="text" ng-model="pl.pcount"></td>
+    </tr>
+    <tr>
+        <td><input type="button" value="评论" ng-click="pl()"></td>
+    </tr>
+</table>
+</body>
+</html>

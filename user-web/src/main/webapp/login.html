@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+</head>
+<script>
+    var app=angular.module('myApp',[]);
+
+    app.controller("mycontroller",function ($scope,$http) {
+        $scope.use={
+            uname:"",
+            pwd:""
+        }
+        $scope.logi=function () {
+
+            $http.post("../user/login.do",$scope.use).success(function (jg) {
+                    location.href="list.html";
+            })
+        }
+
+
+
+
+    })
+</script>
+<body ng-app="myApp" ng-controller="mycontroller" >
+<table>
+    <tr>
+        <td>账户：<input type="text" ng-model="use.uname"></td>
+    </tr>
+    <tr>
+        <td>密码：<input type="password" ng-model="use.pwd"></td>
+    </tr>
+    <tr>
+        <td><input type="button" ng-click="logi()" value="登陆"></td>
+    </tr>
+</table>
+</body>
+</html>

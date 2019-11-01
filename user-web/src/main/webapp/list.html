@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+</head>
+<script>
+    var app=angular.module('myApp',[]);
+
+    app.controller("mycontroller",function ($scope,$http) {
+        $scope.lists=[]
+
+        $scope.list=function () {
+            $http.post("../user/list.do").success(
+                function (jg) {
+
+                    $scope.lists=jg;
+                }
+            )
+        },
+        $scope.addbk=function () {
+            location.href="addbk.html"
+        },
+        $scope.pl=function (id) {
+            location.href="plym.html?id="+id;
+        }    
+
+
+
+        
+    })
+</script>
+
+<body ng-app="myApp" ng-controller="mycontroller" ng-init="list()">
+<table>
+    <tr>
+        <td>序号</td>
+        <td>标题</td>
+        <td>内容</td>
+        <td>作者</td>
+        <td>发布时间</td>
+        <td>评论数</td>
+        <td>是否接收通知</td>
+        <td>操作
+        <input type="button" value="添加博客" ng-click="addbk()">
+        </td>
+    </tr>
+    <tr ng-repeat="bk in lists">
+        <td>{{bk.id}}</td>
+        <td>{{bk.tname}}</td>
+        <td>{{bk.cont}}</td>
+        <td>{{bk.zname}}</td>
+        <td>{{bk.fdate}}</td>
+        <td><a href="pl.html">{{bk.count}}</a></td>
+        <td ng-if="bk.tz==0">否</td>
+        <td ng-if="bk.tz==1">是</td>
+        <td>
+           <input type="button" value="评论" ng-click="pl(bk.id)">
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
