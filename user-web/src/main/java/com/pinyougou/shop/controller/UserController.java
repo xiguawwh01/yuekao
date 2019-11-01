@@ -24,7 +24,7 @@ public class UserController {
         User uu=sev.login(user.getUname());
 
 
-        System.out.println(uu);
+        System.out.println( "232332333333333333333333");
         return "";
     }
 
